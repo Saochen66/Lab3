@@ -1,0 +1,14 @@
+5针对Lab1的黑盒测试
+5.1所选的被测函数及其需求规约
+只需要给出名字即可，无需给出代码。(只选一个，从下面里面选一个有代表性且比较简单的)
+void showDirectedGraph (type G, …)：展示有向图；
+String queryBridgeWords (String word1, String word2)：查询桥接词；
+String generateNewText (String inputText)：根据 bridge word 生成新文本；
+String calcShortestPath (String word1, String word2)：计算两个单词之间的最短路径；
+Double calPageRank (String word)：计算单词的 PR 值（本次实验 d 统一设定为 0.85）；
+String randomWalk ()：随机游走。
+给出该函数所应满足的需求规约 (函数功能、输入描述、输出描述)。
+5.2等价类划分结果
+请根据自己的情况扩展该表格，给各个等价类唯一的编号。
+可根据需要，增加下表的行数。
+表头：约束条件说明	有效等价类及其编号	无效等价类及其编号

@@ -1,0 +1,12 @@
+{
+  "java.checkstyle.configuration": "${workspaceFolder}/config/checkstyle/custom_checks.xml",
+  "java.checkstyle.autocheck": true,
+  "java.checkstyle.version": "9.3"
+}
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
+}
