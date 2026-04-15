@@ -10,3 +10,18 @@
 2026-04-13T11:16:08.287631100 - 开始从文件加载: README.md
 2026-04-13T11:16:08.296158200 - 构建完成，节点数=68
 2026-04-13T11:16:09.806908400 - Wrote graph.dot and graph.html
+2026-04-15T09:12:28.235222700 - shortestPath from a to all computed
+2026-04-15T09:14:40.931652800 - shortestPath from a to all computed
+2026-04-15T09:16:02.382709200 - shortestPath: a -> c = a->b->c (length=2)
+2026-04-15T09:16:49.694248200 - shortestPath from a to all computed
+2026-04-15T09:21:22.990982900 - shortestPath from a to all computed
+2026-04-15T09:23:41.065512200 - shortestPath from a to all computed
+2026-04-15T09:23:41.072261300 - shortestPath: a -> c = a->b->c (length=2)
+2026-04-15T09:23:41.073295600 - shortestPath from a to all computed
+2026-04-15T09:23:47.458235900 - shortestPath from a to all computed
+2026-04-15T09:23:47.465744500 - shortestPath: a -> c = a->b->c (length=2)
+2026-04-15T09:23:47.466746200 - shortestPath from a to all computed
+2026-04-15T09:38:33.137285500 - shortestPath from a to all computed
+2026-04-15T09:38:36.517211200 - shortestPath from a to all computed
+2026-04-15T09:38:40.464131700 - shortestPath from a to all computed
+2026-04-15T09:43:04.572157300 - shortestPath from a to all computed

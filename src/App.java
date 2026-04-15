@@ -230,7 +230,6 @@ public class App {
                 if (!pr.reachable) {
                     out.append("No path from '").append(word1).append("' to '").append(target).append("'.\n");
                 } else {
-                    out.append(word1).append(" -> ");
                     for (int i = 0; i < pr.path.size(); i++) {
                         if (i > 0) out.append("->");
                         out.append(pr.path.get(i));
