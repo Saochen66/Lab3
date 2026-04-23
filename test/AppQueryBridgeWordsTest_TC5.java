@@ -1,25 +1,48 @@
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Field;
+import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
 
 public class AppQueryBridgeWordsTest_TC5 {
+  private static Graph appGraph() throws Exception {
+    Field field = App.class.getDeclaredField("GRAPH");
+    field.setAccessible(true);
+    return (Graph) field.get(null);
+  }
+
+  private static void resetGraph() throws Exception {
+    Graph graph = appGraph();
+    Field adjField = Graph.class.getDeclaredField("adj");
+    adjField.setAccessible(true);
+    @SuppressWarnings("unchecked")
+    Map<String, Map<String, Integer>> adjacency =
+        (Map<String, Map<String, Integer>>) adjField.get(graph);
+    adjacency.clear();
+  }
+
+  private static void addEdges(String... edges) throws Exception {
+    Graph graph = appGraph();
+    for (String edge : edges) {
+      String[] parts = edge.split("->");
+      if (parts.length == 2) {
+        graph.addEdge(parts[0], parts[1]);
+      }
+    }
+  }
+
   @Before
   public void setUp() throws Exception {
-    Graph g = new Graph();
-    // 确保节点 a 存在，但不存在 a->mid 且 mid->a 的 mid
-    g.addEdge("a", "x");
-    Field f = App.class.getDeclaredField("graph");
-    f.setAccessible(true);
-    f.set(null, g);
+    resetGraph();
+    addEdges("a->b", "b->c");
   }
 
   @Test
-  public void test_TC5_selfTargetNoBridge() {
-    String res = App.queryBridgeWords("a", "a");
-    System.out.println("TC5 actual: " + res);
-    assertNotNull(res);
-    assertTrue(res.contains("No bridge words"));
+  public void testInvalidWord2NotInGraph() {
+    String result = App.queryBridgeWords("a", "missing");
+    System.out.println("TC5 actual: " + result);
+    assertTrue(result.contains("No \"a\" or \"missing\" in the graph!"));
   }
 }

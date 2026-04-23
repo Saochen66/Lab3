@@ -4,9 +4,9 @@ import org.junit.Test;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class AppCalcShortestPathTest_TC2 {
+public class AppCalcShortestPathTest_TC7 {
   private static Graph appGraph() throws Exception {
     Field field = App.class.getDeclaredField("GRAPH");
     field.setAccessible(true);
@@ -36,13 +36,14 @@ public class AppCalcShortestPathTest_TC2 {
   @Before
   public void setUp() throws Exception {
     resetGraph();
-    addEdges("a->b");
+    addEdges("a->b", "c->c");
   }
 
   @Test
-  public void testPath2TargetMissing() {
-    String result = App.calcShortestPath("a", "c");
-    System.out.println("TC2 actual: " + result);
-    assertEquals("No \"c\" in the graph!", result);
+  public void testAllTargetsContainsUnreachableMessageLine() {
+    String result = App.calcShortestPath("a", "");
+    System.out.println("TC7 actual: " + result);
+    assertTrue(result.contains("a->b (length=1)"));
+    assertTrue(result.contains("No path from 'a' to 'c'."));
   }
 }

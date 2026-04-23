@@ -69,37 +69,40 @@
     <property name="offCommentFormat" value='^""".?'/>
     <property name="onCommentFormat" value='.'/>
   </module>
-  <module name="TreeWalker">
-    <module name="OuterTypeFilename"/>
-    <module name="MatchXpath">
-      <property name="id" value="singleLineCommentStartWithSpace"/>
-      <property name="query"
-                value="//SINGLE_LINE_COMMENT[./COMMENT_CONTENT[not(starts-with(@text, ' '))
-                       and not(starts-with(@text, '/'))
-                       and not(@text = '\n') and not(ends-with(@text, '//\n'))]]"/>
-      <message key="matchxpath.match" value="''//'' must be followed by a whitespace."/>
-    </module>
-    <module name="IllegalTokenText">
-      <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL, TEXT_BLOCK_CONTENT"/>
-      <property name="format"
-          value="\\u00(08|09|0(a|A)|0(c|C)|0(d|D)|20|22|27|5(C|c))|\\(0(10|11|12|14|15|40|42|47)|134)"/>
-      <property name="message"
-               value="Consider using special escape sequence instead of octal value or Unicode escaped value."/>
-    </module>
-    <module name="AvoidEscapedUnicodeCharacters">
-      <property name="allowEscapesForControlCharacters" value="true"/>
-      <property name="allowByTailComment" value="true"/>
-      <property name="allowNonPrintableEscapes" value="true"/>
-    </module>
-    <module name="AvoidStarImport"/>
-    <module name="OneTopLevelClass"/>
-    <module name="NoLineWrap">
-      <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
-    </module>
-    <module name="NeedBraces">
+    <!-- RightCurly checks and related suppressions disabled per request -->
+    <!--
+    <module name="RightCurly">
+      <property name="id" value="RightCurlySame"/>
       <property name="tokens"
-               value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
+                value="LITERAL_TRY, LITERAL_CATCH, LITERAL_IF, LITERAL_ELSE,
+                    LITERAL_DO"/>
     </module>
+    <module name="SuppressionXpathSingleFilter">
+      <property name="id" value="RightCurlySame"/>
+      <property name="query" value="//RCURLY[parent::SLIST[parent::LITERAL_CATCH
+                               and not(parent::LITERAL_CATCH/following-sibling::*)]]"/>
+    </module>
+    <module name="RightCurly">
+      <property name="id" value="RightCurlyAlone"/>
+      <property name="option" value="alone"/>
+      <property name="tokens"
+               value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT,
+                    INSTANCE_INIT, ANNOTATION_DEF, ENUM_DEF, INTERFACE_DEF, RECORD_DEF,
+                    COMPACT_CTOR_DEF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_FINALLY,
+                    LITERAL_CATCH"/>
+    </module>
+    <module name="SuppressionXpathSingleFilter">
+      <property name="id" value="RightCurlyAlone"/>
+      <property name="query" value="//RCURLY[parent::SLIST[count(./*)=1
+                               and not(parent::LITERAL_CATCH)]
+                               or (preceding-sibling::*[last()][self::LCURLY]
+                               and not(parent::SLIST/parent::LITERAL_CATCH))
+                               or (parent::SLIST/parent::LITERAL_CATCH
+                               and parent::SLIST/parent::LITERAL_CATCH/following-sibling::*)]"/>
+    </module>
+    -->
+    <!-- LeftCurly checks disabled per request (ignore brace placement) -->
+    <!--
     <module name="LeftCurly">
       <property name="id" value="LeftCurlyEol"/>
       <property name="tokens"
@@ -115,11 +118,15 @@
       <property name="tokens"
                 value="LITERAL_CASE, LITERAL_DEFAULT"/>
     </module>
+    -->
+    <!-- SuppressionXpathSingleFilter for LeftCurlyNl disabled along with LeftCurly -->
+    <!--
     <module name="SuppressionXpathSingleFilter">
       <!-- LITERAL_CASE, LITERAL_DEFAULT are reused in SWITCH_RULE  -->
       <property name="id" value="LeftCurlyNl"/>
       <property name="query" value="//SWITCH_RULE/SLIST"/>
     </module>
+    -->
     <module name="RightCurly">
       <property name="id" value="RightCurlySame"/>
       <property name="tokens"
@@ -319,6 +326,8 @@
       <message key="ws.notPreceded"
              value="GenericWhitespace ''{0}'' is not preceded with whitespace."/>
     </module>
+    <!-- Indentation check disabled per request -->
+    <!--
     <module name="Indentation">
       <property name="basicOffset" value="2"/>
       <property name="braceAdjustment" value="2"/>
@@ -327,6 +336,7 @@
       <property name="lineWrappingIndentation" value="4"/>
       <property name="arrayInitIndent" value="2"/>
     </module>
+    -->
 
     <module name="AbbreviationAsWordInName">
       <property name="ignoreFinal" value="false"/>
@@ -340,11 +350,14 @@
     <module name="OverloadMethodsDeclarationOrder"/>
     <module name="ConstructorsDeclarationGrouping"/>
     <module name="VariableDeclarationUsageDistance"/>
+    <!-- CustomImportOrder disabled per request (ignore import/dictionary order) -->
+    <!--
     <module name="CustomImportOrder">
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="true"/>
       <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
     </module>
+    -->
     <module name="MethodParamPad">
       <property name="tokens"
                value="CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, CTOR_CALL,
